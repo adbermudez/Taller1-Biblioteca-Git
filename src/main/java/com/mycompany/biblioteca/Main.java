@@ -121,4 +121,28 @@ public class Main {
     return null;
    }
     
+   static void actualizarLibro() throws IOException {
+    System.out.print("Código del libro a actualizar: ");
+    String codigo = br.readLine();
+    Libro l = buscarLibro(codigo);
+
+    if (l == null) {
+        System.out.println("Libro no encontrado.");
+        return;
+    }
+
+    System.out.print("Nuevo título (" + l.getTitulo() + "): ");
+    String titulo = br.readLine();
+    System.out.print("Nuevo año (" + l.getAnioPublicacion() + "): ");
+    String anio = br.readLine();
+    System.out.print("Nuevo autor (" + l.getAutor() + "): ");
+    String autor = br.readLine();
+
+    l.setTitulo(titulo);
+    l.setAnioPublicacion(anio);
+    l.setAutor(autor);
+
+    System.out.println("Libro actualizado correctamente.");
+   } 
+    
 }
