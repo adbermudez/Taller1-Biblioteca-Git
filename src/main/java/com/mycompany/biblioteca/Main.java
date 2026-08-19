@@ -71,4 +71,18 @@ public class Main {
         
         System.out.println("Cliente actualizado correctamente.");
     }
+    
+    static void eliminarCliente() throws IOException {
+    System.out.print("ID del cliente a eliminar: ");
+    String id = br.readLine();
+    Cliente c = buscarCliente(id);
+
+    if (c == null) {
+        System.out.println("Cliente no encontrado.");
+        return;
+    }
+    clientes.remove(c);
+    System.out.println("Cliente eliminado correctamente.");
+    }
+    
 }
