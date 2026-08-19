@@ -37,4 +37,13 @@ public class Main {
             System.out.println(c);  
         }
     }
+    
+    static Cliente buscarCliente(String id){
+        for (Cliente c: clientes){
+            if (c.getId().equals(id)){
+                return c;
+            }
+        }
+        return null;
+    }
 }
