@@ -144,5 +144,19 @@ public class Main {
 
     System.out.println("Libro actualizado correctamente.");
    } 
+   
+   static void eliminarLibro() throws IOException {
+    System.out.print("Código del libro a eliminar: ");
+    String codigo = br.readLine();
+    Libro l = buscarLibro(codigo);
+
+    if (l == null) {
+        System.out.println("Libro no encontrado.");
+        return;
+    }
+
+    libros.remove(l);
+    System.out.println("Libro eliminado correctamente.");
+   }
     
 }
