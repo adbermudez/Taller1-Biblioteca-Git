@@ -13,8 +13,53 @@ public class Main {
     static ArrayList<Libro> libros = new ArrayList<>();
     static ArrayList<Prestamo> prestamos = new ArrayList<>();
     
-    public static void main(String[] args) {
-            
+    public static void main(String[] args) throws IOException {
+        int opcion;
+        do {
+            System.out.println("\n===== SISTEMA DE GESTIÓN DE BIBLIOTECA =====");
+            System.out.println("1. Crear cliente");
+            System.out.println("2. Listar clientes");
+            System.out.println("3. Buscar cliente");
+            System.out.println("4. Actualizar cliente");
+            System.out.println("5. Eliminar cliente");
+            System.out.println("6. Crear libro");
+            System.out.println("7. Listar libros");
+            System.out.println("8. Buscar libro");
+            System.out.println("9. Actualizar libro");
+            System.out.println("10. Eliminar libro");
+            System.out.println("11. Registrar préstamo");
+            System.out.println("12. Registrar devolución");
+            System.out.println("13. Listar préstamos activos");
+            System.out.println("0. Salir");
+            System.out.print("Seleccione una opción: ");
+            opcion = Integer.parseInt(br.readLine());
+
+            switch (opcion) {
+                case 1: crearCliente(); break;
+                case 2: listarClientes(); break;
+                case 3:
+                    System.out.print("ID a buscar: ");
+                    Cliente c = buscarCliente(br.readLine());
+                    System.out.println(c != null ? c : "Cliente no encontrado.");
+                    break;
+                case 4: actualizarCliente(); break;
+                case 5: eliminarCliente(); break;
+                case 6: crearLibro(); break;
+                case 7: listarLibros(); break;
+                case 8:
+                    System.out.print("Código a buscar: ");
+                    Libro l = buscarLibro(br.readLine());
+                    System.out.println(l != null ? l : "Libro no encontrado.");
+                    break;
+                case 9: actualizarLibro(); break;
+                case 10: eliminarLibro(); break;
+                case 11: crearPrestamo(); break;
+                case 12: devolucion(); break;
+                case 13: listarPrestamos(); break;
+                case 0: System.out.println("Saliendo..."); break;
+                default: System.out.println("Opción inválida.");
+            }
+        } while (opcion != 0);
     }
     
     static void crearCliente() throws IOException {
