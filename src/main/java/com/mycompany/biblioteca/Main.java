@@ -10,6 +10,7 @@ import java.util.HashSet;
 public class Main {
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static ArrayList<Libro> libros = new ArrayList<>();
     
     public static void main(String[] args) {
             
@@ -86,4 +87,18 @@ public class Main {
     System.out.println("Cliente eliminado correctamente.");
     }
     
+    static void crearLibro() throws IOException {
+    System.out.print("Código: ");
+    String codigo = br.readLine();
+    System.out.print("Título: ");
+    String titulo = br.readLine();
+    System.out.print("Año de publicación: ");
+    String anio = br.readLine();
+    System.out.print("Autor: ");
+    String autor = br.readLine();
+
+    Libro l = new Libro(codigo, titulo, anio, autor);
+    libros.add(l);
+    System.out.println("Libro creado correctamente.");
+   }
 }
