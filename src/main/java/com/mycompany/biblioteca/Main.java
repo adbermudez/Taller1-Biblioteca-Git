@@ -188,6 +188,20 @@ public class Main {
     prestamos.add(p);
     l.setDisponible(false);
     System.out.println("Préstamo registrado correctamente.");
-}
-    
+  }
+   
+    static void devolucion() throws IOException {
+    System.out.print("ID del préstamo a devolver: ");
+    String idPrestamo = br.readLine();
+
+    for (Prestamo p : prestamos) {
+        if (p.getIdPrestamo().equals(idPrestamo) && p.getEstado().equals("ACTIVO")) {
+            p.setEstado("DEVUELTO");
+            p.getLibro().setDisponible(true);
+            System.out.println("Devolución registrada correctamente.");
+            return;
+        }
+    }
+    System.out.println("Préstamo activo no encontrado.");
+   }
 }
