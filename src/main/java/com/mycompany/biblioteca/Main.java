@@ -5,12 +5,13 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.time.LocalDate;
 
 public class Main {
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     static ArrayList<Libro> libros = new ArrayList<>();
+    static ArrayList<Prestamo> prestamos = new ArrayList<>();
     
     public static void main(String[] args) {
             
@@ -158,5 +159,62 @@ public class Main {
     libros.remove(l);
     System.out.println("Libro eliminado correctamente.");
    }
+   
+   static void crearPrestamo() throws IOException {
+    System.out.print("ID del préstamo: ");
+    String idPrestamo = br.readLine();
+    System.out.print("ID del cliente: ");
+    String idCliente = br.readLine();
+    System.out.print("Código del libro: ");
+    String codigoLibro = br.readLine();
+
+    Cliente c = buscarCliente(idCliente);
+    Libro l = buscarLibro(codigoLibro);
+
+    if (c == null) {
+        System.out.println("Cliente no encontrado.");
+        return;
+    }
+    if (l == null) {
+        System.out.println("Libro no encontrado.");
+        return;
+    }
+    if (!l.isDisponible()) {
+        System.out.println("El libro no está disponible.");
+        return;
+    }
+
+    Prestamo p = new Prestamo(idPrestamo, c, l, LocalDate.now());
+    prestamos.add(p);
+    l.setDisponible(false);
+    System.out.println("Préstamo registrado correctamente.");
+  }
+   
+    static void devolucion() throws IOException {
+    System.out.print("ID del préstamo a devolver: ");
+    String idPrestamo = br.readLine();
+
+    for (Prestamo p : prestamos) {
+        if (p.getIdPrestamo().equals(idPrestamo) && p.getEstado().equals("ACTIVO")) {
+            p.setEstado("DEVUELTO");
+            p.getLibro().setDisponible(true);
+            System.out.println("Devolución registrada correctamente.");
+            return;
+        }
+    }
+    System.out.println("Préstamo activo no encontrado.");
+   }
     
+    static void listarPrestamos() {
+    boolean hayActivos = false;
+    for (Prestamo p : prestamos) {
+        if (p.getEstado().equals("ACTIVO")) {
+            System.out.println(p);
+            hayActivos = true;
+        }
+    }
+    if (!hayActivos) {
+        System.out.println("No hay préstamos activos.");
+    }
+   }
 }
