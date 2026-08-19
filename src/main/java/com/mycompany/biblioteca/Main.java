@@ -10,6 +10,7 @@ import java.util.HashSet;
 public class Main {
     static ArrayList<Cliente> clientes = new ArrayList<>();
     static BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    static ArrayList<Libro> libros = new ArrayList<>();
     
     public static void main(String[] args) {
             
@@ -85,5 +86,77 @@ public class Main {
     clientes.remove(c);
     System.out.println("Cliente eliminado correctamente.");
     }
+    
+    static void crearLibro() throws IOException {
+    System.out.print("Código: ");
+    String codigo = br.readLine();
+    System.out.print("Título: ");
+    String titulo = br.readLine();
+    System.out.print("Año de publicación: ");
+    String anio = br.readLine();
+    System.out.print("Autor: ");
+    String autor = br.readLine();
+
+    Libro l = new Libro(codigo, titulo, anio, autor);
+    libros.add(l);
+    System.out.println("Libro creado correctamente.");
+   }
+    
+    static void listarLibros() {
+    if (libros.isEmpty()) {
+        System.out.println("No hay libros registrados.");
+        return;
+    }
+    for (Libro l : libros) {
+        System.out.println(l);
+    }
+   }
+    
+    static Libro buscarLibro(String codigo) {
+    for (Libro l : libros) {
+        if (l.getCodigo().equals(codigo)) {
+            return l;
+        }
+    }
+    return null;
+   }
+    
+   static void actualizarLibro() throws IOException {
+    System.out.print("Código del libro a actualizar: ");
+    String codigo = br.readLine();
+    Libro l = buscarLibro(codigo);
+
+    if (l == null) {
+        System.out.println("Libro no encontrado.");
+        return;
+    }
+
+    System.out.print("Nuevo título (" + l.getTitulo() + "): ");
+    String titulo = br.readLine();
+    System.out.print("Nuevo año (" + l.getAnioPublicacion() + "): ");
+    String anio = br.readLine();
+    System.out.print("Nuevo autor (" + l.getAutor() + "): ");
+    String autor = br.readLine();
+
+    l.setTitulo(titulo);
+    l.setAnioPublicacion(anio);
+    l.setAutor(autor);
+
+    System.out.println("Libro actualizado correctamente.");
+   } 
+   
+   static void eliminarLibro() throws IOException {
+    System.out.print("Código del libro a eliminar: ");
+    String codigo = br.readLine();
+    Libro l = buscarLibro(codigo);
+
+    if (l == null) {
+        System.out.println("Libro no encontrado.");
+        return;
+    }
+
+    libros.remove(l);
+    System.out.println("Libro eliminado correctamente.");
+   }
     
 }
