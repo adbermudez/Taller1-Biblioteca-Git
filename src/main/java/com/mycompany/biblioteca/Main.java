@@ -112,4 +112,13 @@ public class Main {
     }
    }
     
+    static Libro buscarLibro(String codigo) {
+    for (Libro l : libros) {
+        if (l.getCodigo().equals(codigo)) {
+            return l;
+        }
+    }
+    return null;
+   }
+    
 }
